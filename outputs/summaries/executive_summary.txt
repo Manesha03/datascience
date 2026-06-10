@@ -1,0 +1,18 @@
+Retail Sales Analytics Portfolio - Executive Summary
+
+This submission presents a complete retail sales analytics project using one clean, reproducible analysis pipeline.
+
+Dataset overview:
+- Rows: 5,599
+- Date range: 2025-01-01 to 2025-12-31
+- Categories: Beauty, Electronics, Fashion, Home, Sports
+- Regions: East, North, South, West
+- Total revenue: $4,245,014.25
+- Total profit: $1,463,494.60
+
+Files generated:
+- Sales trend and category charts for time series, monthly/quarterly aggregation, category comparison, and share analysis.
+- Distribution charts, KDEs, box plots, an outlier table, and a written distribution interpretation.
+- Correlation matrix, masked annotated heatmap, pairplot, and relationship summary.
+
+All charts are exported as PNG files under outputs/charts, and all written outputs are saved under outputs/summaries.
