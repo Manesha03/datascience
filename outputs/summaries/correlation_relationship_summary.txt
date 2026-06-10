@@ -1,0 +1,12 @@
+Correlation and Relationship Analysis Summary
+
+Pearson correlations were computed for numeric variables and visualized with an annotated heatmap. The upper triangle is masked to avoid repeating the same information twice. A pairplot was also created for units sold, unit price, marketing spend, revenue, and profit so that linear relationships, clusters, and possible non-linear patterns can be inspected visually.
+
+Strongest positive relationship:
+- profit and revenue: 0.97
+
+Strongest negative relationship:
+- profit_margin and marketing_spend: -0.31
+
+Business interpretation:
+Revenue and profit move together strongly because higher-value orders usually create higher gross profit. Unit price and revenue also tend to be positively related, especially for categories with expensive items. Discount rate and profit margin show a negative relationship, which is expected because deeper discounts reduce retained margin. Customer satisfaction has a mild relationship with shipping days, suggesting faster delivery supports better customer experience.
