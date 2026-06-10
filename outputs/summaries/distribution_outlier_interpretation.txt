@@ -1,0 +1,3 @@
+Distribution and Outlier Analysis Interpretation
+
+The histogram with KDE shows that order revenue is right-skewed, with many medium-value orders and a smaller number of high-value orders. The calculated skewness is 2.01, confirming that the distribution has a longer upper tail. The box plots show that regional revenue spreads are broadly similar, but North has the highest median order revenue ($556.06) while South has the lowest median ($485.23). Using the IQR rule, 412 outliers were detected above $1,992.17; the lower IQR threshold is below zero, so there are no realistic lower-end revenue outliers; these are mostly premium, multi-unit orders rather than data errors, so they should be retained for business analysis but monitored separately.
