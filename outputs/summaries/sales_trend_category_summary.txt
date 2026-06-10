@@ -1,0 +1,15 @@
+Sales Trend and Category Analysis Summary
+
+The line charts are used for daily and monthly sales because they clearly show changes over time, including seasonality, peaks, and dips. The daily view preserves detail, while the monthly aggregation smooths short-term noise and makes the yearly trend easier to read. A bar chart is used for quarterly sales and category comparison because bars make discrete groups easy to compare. A pie chart is included only for category share, where the goal is to communicate each category's contribution to the whole.
+
+Key findings:
+- Total records analyzed: 5,599
+- Total revenue: $4,245,014.25
+- Best revenue month: March
+- Top category: Electronics ($2,231,105.24)
+
+Formatting choices:
+- Clear chart titles explain the question each chart answers.
+- Axes use readable date/category labels and currency formatting for revenue.
+- Legends are used only where they add meaning, avoiding unnecessary visual clutter.
+- PNG exports are saved in outputs/charts/sales_trend_category_analysis.
