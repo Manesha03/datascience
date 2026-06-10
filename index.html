@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Retail Sales Analytics Portfolio</title>
+  <style>
+    :root {
+      --bg: #f7f9fb;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --muted: #64748b;
+      --line: #dbe3ec;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 48px 24px;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    header p {
+      max-width: 820px;
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 1.08rem;
+    }
+
+    main {
+      padding: 28px 0 56px;
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.55rem;
+      letter-spacing: 0;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .metric,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    }
+
+    .metric {
+      padding: 18px;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1.45rem;
+      color: var(--accent-dark);
+    }
+
+    .panel {
+      padding: 22px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    figure {
+      margin: 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #ffffff;
+    }
+
+    figcaption {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .wide {
+      grid-column: 1 / -1;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .links a {
+      display: inline-block;
+      color: #ffffff;
+      background: var(--accent);
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .links a:hover {
+      background: var(--accent-dark);
+    }
+
+    .report-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .report-actions button {
+      appearance: none;
+      border: 0;
+      color: #ffffff;
+      background: var(--accent);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .report-actions button:hover,
+    .report-actions button.active {
+      background: var(--accent-dark);
+    }
+
+    .report-viewer {
+      margin-top: 18px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .report-viewer h3 {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-size: 1.25rem;
+    }
+
+    .report-viewer p {
+      margin: 0 0 10px;
+    }
+
+    .report-viewer ul {
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    .table-wrap {
+      margin-top: 12px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      font-size: 0.92rem;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    th {
+      background: #eef6f5;
+      color: var(--accent-dark);
+    }
+
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .report-card {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .report-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .report-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .report-card ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      color: var(--muted);
+      padding: 0 0 28px;
+      text-align: center;
+    }
+
+    @media (max-width: 820px) {
+      .metrics,
+      .grid,
+      .report-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding: 36px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Retail Sales Analytics Portfolio</h1>
+      <p>A complete sales analytics dashboard covering trend analysis, category comparison, distribution inspection, outlier detection, and correlation analysis.</p>
+      <div class="metrics">
+        <div class="metric">
+          <span>Records</span>
+          <strong>5,599</strong>
+        </div>
+        <div class="metric">
+          <span>Date Range</span>
+          <strong>2025</strong>
+        </div>
+        <div class="metric">
+          <span>Total Revenue</span>
+          <strong>$4.25M</strong>
+        </div>
+        <div class="metric">
+          <span>Total Profit</span>
+          <strong>$1.46M</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h2>Project Overview</h2>
+      <p>This project uses a reproducible retail sales dataset to analyze business performance across product categories, regions, revenue distributions, and numeric relationships. The Python pipeline exports the dataset, PNG charts, and written report files.</p>
+      <div class="report-actions" aria-label="Project preview controls">
+        <button class="active" type="button" data-overview="summary">Executive Summary</button>
+        <button type="button" data-overview="dataset">Dataset Preview</button>
+        <button type="button" data-overview="script">Python Script</button>
+      </div>
+      <div class="report-viewer" id="overviewViewer" aria-live="polite"></div>
+    </section>
+
+    <section>
+      <h2>Sales Trend and Category Analysis</h2>
+      <div class="grid">
+        <figure class="wide">
+          <img src="outputs/charts/sales_trend_category_analysis/daily_sales_line.png" alt="Daily sales revenue line chart">
+          <figcaption>Daily sales revenue across the full year.</figcaption>
+        </figure>
+        <figure>
+          <img src="outputs/charts/sales_trend_category_analysis/monthly_sales_line.png" alt="Monthly sales aggregation line chart">
+          <figcaption>Monthly sales aggregation highlights broader revenue trends.</figcaption>
+        </figure>
+        <figure>
+          <img src="outputs/charts/sales_trend_category_analysis/quarterly_sales_bar.png" alt="Quarterly sales bar chart">
+          <figcaption>Quarterly aggregation compares revenue across business periods.</figcaption>
+        </figure>
+        <figure>
+          <img src="outputs/charts/sales_trend_category_analysis/category_revenue_bar.png" alt="Category revenue bar chart">
+          <figcaption>Category revenue comparison using a bar chart.</figcaption>
+        </figure>
+        <figure>
+          <img src="outputs/charts/sales_trend_category_analysis/category_revenue_share_pie.png" alt="Category revenue share pie chart">
+          <figcaption>Category share of total revenue.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Distribution and Outlier Analysis</h2>
+      <div class="grid">
+        <figure>
+          <img src="outputs/charts/distribution_outlier_analysis/revenue_histogram_kde.png" alt="Revenue histogram with KDE">
+          <figcaption>Revenue distribution with histogram and KDE curve.</figcaption>
+        </figure>
+        <figure>
+          <img src="outputs/charts/distribution_outlier_analysis/revenue_boxplot_by_region.png" alt="Revenue box plot by region">
+          <figcaption>Regional revenue spread and outlier comparison.</figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="outputs/charts/distribution_outlier_analysis/revenue_kde_by_region.png" alt="Revenue KDE by region">
+          <figcaption>Revenue density comparison across regions.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Correlation and Relationship Analysis</h2>
+      <div class="grid">
+        <figure>
+          <img src="outputs/charts/correlation_relationship_analysis/correlation_heatmap_masked.png" alt="Masked Pearson correlation heatmap">
+          <figcaption>Annotated Pearson correlation heatmap with upper triangle masked.</figcaption>
+        </figure>
+        <figure>
+          <img src="outputs/charts/correlation_relationship_analysis/key_variable_pairplot.png" alt="Pairplot for key sales variables">
+          <figcaption>Pairwise relationships for revenue, profit, unit price, units sold, and marketing spend.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Report Files</h2>
+      <p>Click a report below to preview the analysis directly on this dashboard.</p>
+      <div class="report-grid">
+        <article class="report-card">
+          <h3>Sales Trend Summary</h3>
+          <p>Line charts show daily and monthly sales movement, while bar and pie charts compare category performance and share. Electronics is the leading category with $2,231,105.24 in revenue, and March is the best revenue month.</p>
+          <ul>
+            <li>Total records: 5,599</li>
+            <li>Total revenue: $4,245,014.25</li>
+            <li>Top category: Electronics</li>
+          </ul>
+        </article>
+        <article class="report-card">
+          <h3>Distribution Interpretation</h3>
+          <p>Revenue is right-skewed, meaning most orders are medium-value while a smaller group of premium orders creates a longer upper tail. The IQR method identifies 412 high-revenue outliers above $1,992.17.</p>
+          <ul>
+            <li>Skewness: 2.01</li>
+            <li>Highest median region: North</li>
+            <li>Lowest median region: South</li>
+          </ul>
+        </article>
+        <article class="report-card">
+          <h3>Correlation Summary</h3>
+          <p>The strongest positive relationship is between profit and revenue at 0.97. The strongest negative relationship is between profit margin and marketing spend at -0.31.</p>
+          <ul>
+            <li>Heatmap uses Pearson correlation</li>
+            <li>Upper triangle is masked</li>
+            <li>Pairplot compares key sales variables</li>
+          </ul>
+        </article>
+      </div>
+      <div class="report-actions" aria-label="Report preview controls">
+        <button class="active" type="button" data-report="sales">Sales Summary</button>
+        <button type="button" data-report="distribution">Distribution Interpretation</button>
+        <button type="button" data-report="correlation">Correlation Summary</button>
+        <button type="button" data-report="outliers">Outlier Table</button>
+        <button type="button" data-report="matrix">Correlation Matrix</button>
+      </div>
+      <div class="report-viewer" id="reportViewer" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer>
+    Retail Sales Analytics Portfolio
+  </footer>
+  <script>
+    const reports = {
+      sales: {
+        title: "Sales Trend and Category Analysis",
+        html: `
+          <p>Line charts are used for daily and monthly sales because they clearly show changes over time, seasonality, peaks, and dips. The daily view preserves detail, while monthly aggregation smooths short-term noise and makes the yearly trend easier to read.</p>
+          <ul>
+            <li>Total records analyzed: 5,599</li>
+            <li>Total revenue: $4,245,014.25</li>
+            <li>Best revenue month: March</li>
+            <li>Top category: Electronics ($2,231,105.24)</li>
+          </ul>
+          <p>Bar charts are used for quarterly and category comparison because discrete groups are easier to compare with bars. The pie chart is used only for category share, where the goal is to show contribution to the whole.</p>
+        `
+      },
+      distribution: {
+        title: "Distribution and Outlier Analysis",
+        html: `
+          <p>The histogram with KDE shows that order revenue is right-skewed. Most orders are medium-value, while a smaller group of premium orders creates a long upper tail.</p>
+          <ul>
+            <li>Revenue skewness: 2.01</li>
+            <li>Highest median region: North ($556.06)</li>
+            <li>Lowest median region: South ($485.23)</li>
+            <li>Detected high-revenue outliers: 412 orders above $1,992.17</li>
+          </ul>
+          <p>These outliers are mostly premium, multi-unit orders rather than data errors, so they should be retained for business analysis but monitored separately.</p>
+        `
+      },
+      correlation: {
+        title: "Correlation and Relationship Analysis",
+        html: `
+          <p>Pearson correlations were computed for all numeric variables and visualized using a masked, annotated heatmap. A pairplot was also created for units sold, unit price, marketing spend, revenue, and profit.</p>
+          <ul>
+            <li>Strongest positive relationship: profit and revenue (0.97)</li>
+            <li>Strongest negative relationship: profit margin and marketing spend (-0.31)</li>
+          </ul>
+          <p>Revenue and profit move together strongly because higher-value orders usually create higher gross profit. Discounting and marketing spend reduce retained margin, which explains the negative relationship with profit margin.</p>
+        `
+      },
+      outliers: {
+        title: "Top Revenue Outliers Preview",
+        html: `
+          <p>This preview highlights representative high-value orders detected by the IQR outlier rule.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th><th>Category</th><th>Region</th><th>Units</th><th>Revenue</th><th>Profit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>2025-03-09</td><td>Electronics</td><td>North</td><td>10</td><td>$5,304.58</td><td>$1,977.60</td></tr>
+                <tr><td>2025-03-29</td><td>Electronics</td><td>North</td><td>9</td><td>$5,278.96</td><td>$1,689.51</td></tr>
+                <tr><td>2025-02-17</td><td>Electronics</td><td>East</td><td>10</td><td>$5,069.74</td><td>$1,786.54</td></tr>
+                <tr><td>2025-03-23</td><td>Electronics</td><td>North</td><td>10</td><td>$4,982.61</td><td>$1,755.80</td></tr>
+                <tr><td>2025-04-27</td><td>Electronics</td><td>West</td><td>10</td><td>$4,936.95</td><td>$1,836.67</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The full exported table is available at <strong>outputs/summaries/top_revenue_outliers.csv</strong>.</p>
+        `
+      },
+      matrix: {
+        title: "Correlation Matrix Preview",
+        html: `
+          <p>This preview shows the most important relationships from the full Pearson correlation matrix.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Variable Pair</th><th>Correlation</th><th>Interpretation</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Profit and Revenue</td><td>0.97</td><td>Very strong positive relationship</td></tr>
+                <tr><td>Revenue and Unit Price</td><td>0.75</td><td>Higher-priced products tend to generate higher revenue</td></tr>
+                <tr><td>Profit Margin and Marketing Spend</td><td>-0.31</td><td>Higher marketing cost reduces retained margin</td></tr>
+                <tr><td>Customer Satisfaction and Shipping Days</td><td>-0.20</td><td>Longer delivery time weakens satisfaction</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The full exported matrix is available at <strong>outputs/summaries/sales_correlation_matrix.csv</strong>.</p>
+        `
+      }
+    };
+
+    const overviewItems = {
+      summary: {
+        title: "Executive Summary",
+        html: `
+          <p>This retail analytics project analyzes 5,599 sales records from 2025 across five categories and four regions.</p>
+          <ul>
+            <li>Total revenue: $4,245,014.25</li>
+            <li>Total profit: $1,463,494.60</li>
+            <li>Categories: Beauty, Electronics, Fashion, Home, Sports</li>
+            <li>Regions: East, North, South, West</li>
+          </ul>
+          <p>The dashboard includes sales trend charts, category comparisons, distribution plots, outlier analysis, correlation heatmaps, and pairwise relationship analysis.</p>
+        `
+      },
+      dataset: {
+        title: "Dataset Preview",
+        html: `
+          <p>The generated dataset is saved at <strong>data/retail_sales.csv</strong>. It contains order-level retail sales fields used by the analysis pipeline.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Column</th><th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>order_date</td><td>Date of the transaction</td></tr>
+                <tr><td>category</td><td>Product category sold</td></tr>
+                <tr><td>region</td><td>Sales region</td></tr>
+                <tr><td>units_sold</td><td>Number of units in the order</td></tr>
+                <tr><td>revenue</td><td>Final sales revenue after discount and adjustments</td></tr>
+                <tr><td>profit</td><td>Estimated order profit</td></tr>
+                <tr><td>profit_margin</td><td>Profit divided by revenue</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      script: {
+        title: "Python Script Overview",
+        html: `
+          <p>The analysis script is saved at <strong>src/retail_sales_analytics.py</strong>. It builds the complete project from start to finish.</p>
+          <ul>
+            <li>Creates required project folders</li>
+            <li>Generates a reproducible retail sales dataset</li>
+            <li>Exports charts as PNG files</li>
+            <li>Writes report summaries and CSV analysis tables</li>
+          </ul>
+          <p>Run it with: <strong>python src/retail_sales_analytics.py</strong></p>
+        `
+      }
+    };
+
+    const viewer = document.querySelector("#reportViewer");
+    const buttons = document.querySelectorAll("[data-report]");
+    const overviewViewer = document.querySelector("#overviewViewer");
+    const overviewButtons = document.querySelectorAll("[data-overview]");
+
+    function showReport(reportKey) {
+      const report = reports[reportKey];
+      viewer.innerHTML = `<h3>${report.title}</h3>${report.html}`;
+      buttons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.report === reportKey);
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => showReport(button.dataset.report));
+    });
+
+    function showOverview(itemKey) {
+      const item = overviewItems[itemKey];
+      overviewViewer.innerHTML = `<h3>${item.title}</h3>${item.html}`;
+      overviewButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.overview === itemKey);
+      });
+    }
+
+    overviewButtons.forEach((button) => {
+      button.addEventListener("click", () => showOverview(button.dataset.overview));
+    });
+
+    showOverview("summary");
+    showReport("sales");
+  </script>
+</body>
+</html>
