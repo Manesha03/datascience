@@ -1,0 +1,17 @@
+Methodology and Data Preparation Notes
+
+Analytical statement:
+This project evaluates how retail sales performance changes over time, across categories, across regions, and across key numeric business drivers.
+
+Dataset structure:
+The dataset contains order-level retail transactions with date, category, region, units sold, price, discount, marketing spend, shipping speed, customer satisfaction, revenue, profit, and profit margin.
+
+Preparation workflow:
+- Generated a reproducible synthetic retail sales dataset using a fixed random seed.
+- Validated missing values and blank strings across all variables.
+- Created derived business metrics including revenue, profit, and profit margin.
+- Aggregated sales by day, month, quarter, category, and region.
+- Used Pearson correlation for numeric relationship analysis.
+
+Limitations:
+The dataset is synthetic, so findings are designed for analytical demonstration rather than direct business decision-making. A real project should connect to transactional source data, validate business rules with stakeholders, and include external factors such as campaigns, inventory, holidays, and competitor activity.
