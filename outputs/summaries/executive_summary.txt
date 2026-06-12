@@ -1,4 +1,4 @@
-Retail Sales Analytics Portfolio - Executive Summary
+Retail Sales Analytics - Executive Summary
 
 This submission presents a complete retail sales analytics project using one clean, reproducible analysis pipeline.
 
