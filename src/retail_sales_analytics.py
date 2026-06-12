@@ -304,8 +304,66 @@ Revenue and profit move together strongly because higher-value orders usually cr
     (SUMMARY_DIR / "correlation_relationship_summary.txt").write_text(summary, encoding="utf-8")
 
 
+def write_data_quality_outputs(df: pd.DataFrame) -> None:
+    missing = pd.DataFrame(
+        {
+            "variable": df.columns,
+            "missing_count": [int(df[column].isna().sum()) for column in df.columns],
+            "blank_count": [
+                int((df[column].astype(str).str.strip() == "").sum()) if df[column].dtype == "object" else 0
+                for column in df.columns
+            ],
+        }
+    )
+    missing["total_missing"] = missing["missing_count"] + missing["blank_count"]
+    missing.to_csv(SUMMARY_DIR / "data_quality_missing_values.csv", index=False)
+
+    numeric_summary = (
+        df.select_dtypes(include="number")
+        .agg(["mean", "median", "std", "min", "max"])
+        .transpose()
+        .round(2)
+        .reset_index()
+        .rename(columns={"index": "variable", "std": "standard_deviation"})
+    )
+    numeric_summary.to_csv(SUMMARY_DIR / "numeric_variable_summary.csv", index=False)
+
+    category_region_summary = (
+        df.groupby(["category", "region"], as_index=False)
+        .agg(
+            orders=("revenue", "size"),
+            total_revenue=("revenue", "sum"),
+            total_profit=("profit", "sum"),
+            average_order_value=("revenue", "mean"),
+        )
+        .round(2)
+        .sort_values(["total_revenue"], ascending=False)
+    )
+    category_region_summary.to_csv(SUMMARY_DIR / "category_region_performance.csv", index=False)
+
+    methodology = """Methodology and Data Preparation Notes
+
+Analytical statement:
+This project evaluates how retail sales performance changes over time, across categories, across regions, and across key numeric business drivers.
+
+Dataset structure:
+The dataset contains order-level retail transactions with date, category, region, units sold, price, discount, marketing spend, shipping speed, customer satisfaction, revenue, profit, and profit margin.
+
+Preparation workflow:
+- Generated a reproducible synthetic retail sales dataset using a fixed random seed.
+- Validated missing values and blank strings across all variables.
+- Created derived business metrics including revenue, profit, and profit margin.
+- Aggregated sales by day, month, quarter, category, and region.
+- Used Pearson correlation for numeric relationship analysis.
+
+Limitations:
+The dataset is synthetic, so findings are designed for analytical demonstration rather than direct business decision-making. A real project should connect to transactional source data, validate business rules with stakeholders, and include external factors such as campaigns, inventory, holidays, and competitor activity.
+"""
+    (SUMMARY_DIR / "methodology_data_preparation_notes.txt").write_text(methodology, encoding="utf-8")
+
+
 def write_executive_summary(df: pd.DataFrame) -> None:
-    summary = f"""Retail Sales Analytics Portfolio - Executive Summary
+    summary = f"""Retail Sales Analytics - Executive Summary
 
 This submission presents a complete retail sales analytics project using one clean, reproducible analysis pipeline.
 
@@ -338,6 +396,7 @@ def main() -> None:
     analyze_sales_trends_and_categories(df)
     analyze_distributions_and_outliers(df)
     analyze_correlations_and_relationships(df)
+    write_data_quality_outputs(df)
     write_executive_summary(df)
 
     print("Retail sales analytics project complete.")
