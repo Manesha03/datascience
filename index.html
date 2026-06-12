@@ -3,16 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Retail Sales Analytics Portfolio</title>
+  <title>Retail Sales Analytics </title>
   <style>
     :root {
-      --bg: #f7f9fb;
+      --bg: #f5f6f2;
       --panel: #ffffff;
-      --text: #1f2937;
-      --muted: #64748b;
-      --line: #dbe3ec;
-      --accent: #0f766e;
-      --accent-dark: #115e59;
+      --text: #202124;
+      --muted: #667085;
+      --line: #d8ddd5;
+      --accent: #2f6690;
+      --accent-dark: #1f4e73;
+      --accent-soft: #e8f1f7;
+      --gold: #b7791f;
+      --gold-soft: #fff4db;
+      --header: #252a31;
     }
 
     * {
@@ -28,9 +32,42 @@
     }
 
     header {
-      background: #0f172a;
+      background: var(--header);
       color: #ffffff;
       padding: 48px 24px;
+      border-bottom: 5px solid var(--gold);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    .nav-inner a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 8px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .nav-inner a:hover {
+      color: var(--accent-dark);
+      background: var(--accent-soft);
     }
 
     .container {
@@ -78,11 +115,24 @@
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 8px;
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+      box-shadow: 0 10px 26px rgba(32, 33, 36, 0.07);
     }
 
     .metric {
       padding: 18px;
+      border-top: 4px solid var(--accent);
+    }
+
+    .metric:nth-child(2) {
+      border-top-color: var(--gold);
+    }
+
+    .metric:nth-child(3) {
+      border-top-color: #6f7d4f;
+    }
+
+    .metric:nth-child(4) {
+      border-top-color: #8a5a44;
     }
 
     .metric span {
@@ -104,6 +154,11 @@
       padding: 22px;
     }
 
+    .panel h2 {
+      border-left: 4px solid var(--gold);
+      padding-left: 10px;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -116,7 +171,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+      box-shadow: 0 10px 26px rgba(32, 33, 36, 0.07);
     }
 
     figure img {
@@ -152,10 +207,12 @@
       padding: 10px 14px;
       border-radius: 6px;
       font-weight: 700;
+      transition: background 0.18s ease, transform 0.18s ease;
     }
 
     .links a:hover {
       background: var(--accent-dark);
+      transform: translateY(-1px);
     }
 
     .report-actions {
@@ -175,16 +232,22 @@
       font: inherit;
       font-weight: 700;
       cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
     }
 
     .report-actions button:hover,
     .report-actions button.active {
       background: var(--accent-dark);
+      box-shadow: inset 0 -3px 0 var(--gold);
+    }
+
+    .report-actions button:hover {
+      transform: translateY(-1px);
     }
 
     .report-viewer {
       margin-top: 18px;
-      background: #f8fafc;
+      background: #fbfcfa;
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 18px;
@@ -229,7 +292,7 @@
     }
 
     th {
-      background: #eef6f5;
+      background: var(--accent-soft);
       color: var(--accent-dark);
     }
 
@@ -241,7 +304,7 @@
     }
 
     .report-card {
-      background: #f8fafc;
+      background: #fbfcfa;
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 16px;
@@ -250,6 +313,7 @@
     .report-card h3 {
       margin: 0 0 8px;
       font-size: 1.05rem;
+      color: var(--accent-dark);
     }
 
     .report-card p {
@@ -265,6 +329,34 @@
       font-size: 0.95rem;
     }
 
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .process-step {
+      border-left: 4px solid var(--accent);
+      background: #fbfcfa;
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .process-step:nth-child(2) {
+      border-left-color: var(--gold);
+    }
+
+    .process-step:nth-child(4) {
+      border-left-color: #6f7d4f;
+    }
+
+    .process-step strong {
+      display: block;
+      color: var(--accent-dark);
+      margin-bottom: 4px;
+    }
+
     footer {
       color: var(--muted);
       padding: 0 0 28px;
@@ -274,7 +366,8 @@
     @media (max-width: 820px) {
       .metrics,
       .grid,
-      .report-grid {
+      .report-grid,
+      .process {
         grid-template-columns: 1fr;
       }
 
@@ -287,7 +380,7 @@
 <body>
   <header>
     <div class="container">
-      <h1>Retail Sales Analytics Portfolio</h1>
+      <h1>Retail Sales Analytics</h1>
       <p>A complete sales analytics dashboard covering trend analysis, category comparison, distribution inspection, outlier detection, and correlation analysis.</p>
       <div class="metrics">
         <div class="metric">
@@ -310,8 +403,19 @@
     </div>
   </header>
 
+  <nav>
+    <div class="container nav-inner">
+      <a href="#overview">Overview</a>
+      <a href="#methodology">Methodology</a>
+      <a href="#sales">Sales Trends</a>
+      <a href="#distribution">Distribution</a>
+      <a href="#correlation">Correlation</a>
+      <a href="#reports">Reports</a>
+    </div>
+  </nav>
+
   <main class="container">
-    <section class="panel">
+    <section class="panel" id="overview">
       <h2>Project Overview</h2>
       <p>This project uses a reproducible retail sales dataset to analyze business performance across product categories, regions, revenue distributions, and numeric relationships. The Python pipeline exports the dataset, PNG charts, and written report files.</p>
       <div class="report-actions" aria-label="Project preview controls">
@@ -322,7 +426,38 @@
       <div class="report-viewer" id="overviewViewer" aria-live="polite"></div>
     </section>
 
-    <section>
+    <section class="panel" id="methodology">
+      <h2>Methodology and Data Preparation</h2>
+      <p>This section adds the formal report structure commonly expected in an analytical submission: analytical statement, dataset structure, preparation checks, and validation outputs.</p>
+      <div class="process">
+        <div class="process-step">
+          <strong>1. Define</strong>
+          <span>Evaluate retail sales performance by time, category, region, distribution, and numeric relationships.</span>
+        </div>
+        <div class="process-step">
+          <strong>2. Prepare</strong>
+          <span>Generate reproducible order-level sales data, validate missing values, and create business metrics.</span>
+        </div>
+        <div class="process-step">
+          <strong>3. Analyze</strong>
+          <span>Use aggregations, distribution plots, outlier rules, Pearson correlations, and pairwise visual checks.</span>
+        </div>
+        <div class="process-step">
+          <strong>4. Report</strong>
+          <span>Export PNG charts, CSV summary tables, and written interpretation files for submission.</span>
+        </div>
+      </div>
+      <div class="report-actions" aria-label="Methodology preview controls">
+        <button class="active" type="button" data-method="statement">Analytical Statement</button>
+        <button type="button" data-method="variables">Variable Structure</button>
+        <button type="button" data-method="quality">Data Quality Check</button>
+        <button type="button" data-method="descriptive">Descriptive Tables</button>
+        <button type="button" data-method="limitations">Limitations</button>
+      </div>
+      <div class="report-viewer" id="methodViewer" aria-live="polite"></div>
+    </section>
+
+    <section id="sales">
       <h2>Sales Trend and Category Analysis</h2>
       <div class="grid">
         <figure class="wide">
@@ -348,7 +483,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="distribution">
       <h2>Distribution and Outlier Analysis</h2>
       <div class="grid">
         <figure>
@@ -366,7 +501,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="correlation">
       <h2>Correlation and Relationship Analysis</h2>
       <div class="grid">
         <figure>
@@ -380,7 +515,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel" id="reports">
       <h2>Report Files</h2>
       <p>Click a report below to preview the analysis directly on this dashboard.</p>
       <div class="report-grid">
@@ -424,7 +559,7 @@
   </main>
 
   <footer>
-    Retail Sales Analytics Portfolio
+    Retail Sales Analytics
   </footer>
   <script>
     const reports = {
@@ -563,10 +698,96 @@
       }
     };
 
+    const methodItems = {
+      statement: {
+        title: "Analytical Statement",
+        html: `
+          <p>This analysis evaluates how retail sales performance changes across time, product categories, regions, and key business drivers.</p>
+          <ul>
+            <li>Time question: How does revenue move daily, monthly, and quarterly?</li>
+            <li>Category question: Which product categories contribute most to revenue?</li>
+            <li>Distribution question: How spread out are order values, and which orders are outliers?</li>
+            <li>Relationship question: Which numeric variables move together most strongly?</li>
+          </ul>
+        `
+      },
+      variables: {
+        title: "Variable Structure",
+        html: `
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Role</th><th>Variables</th><th>Purpose</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Time</td><td>order_date</td><td>Daily, monthly, and quarterly trend analysis</td></tr>
+                <tr><td>Groups</td><td>category, region</td><td>Comparison across business segments</td></tr>
+                <tr><td>Sales Inputs</td><td>units_sold, unit_price, discount_rate</td><td>Drivers used to calculate revenue</td></tr>
+                <tr><td>Operations</td><td>marketing_spend, shipping_days</td><td>Operational and cost-side context</td></tr>
+                <tr><td>Outcomes</td><td>revenue, profit, profit_margin, customer_satisfaction</td><td>Main performance metrics</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      quality: {
+        title: "Data Quality Check",
+        html: `
+          <p>The project now exports a missing-value audit to <strong>outputs/summaries/data_quality_missing_values.csv</strong>.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Check</th><th>Result</th><th>Interpretation</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Missing values</td><td>0 detected in generated dataset</td><td>No imputation required</td></tr>
+                <tr><td>Blank strings</td><td>0 expected after generation</td><td>Categorical fields are complete</td></tr>
+                <tr><td>Date range</td><td>2025-01-01 to 2025-12-31</td><td>Full-year trend analysis supported</td></tr>
+                <tr><td>Reproducibility</td><td>Fixed random seed: 42</td><td>Same dataset can be regenerated</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      descriptive: {
+        title: "Descriptive Summary Tables",
+        html: `
+          <p>Additional CSV tables are generated for stronger report evidence.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Output File</th><th>What It Contains</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>numeric_variable_summary.csv</td><td>Mean, median, standard deviation, minimum, and maximum for numeric fields</td></tr>
+                <tr><td>category_region_performance.csv</td><td>Orders, revenue, profit, and average order value by category and region</td></tr>
+                <tr><td>sales_correlation_matrix.csv</td><td>Full Pearson correlation matrix for numeric variables</td></tr>
+                <tr><td>top_revenue_outliers.csv</td><td>Highest-value orders detected using the IQR rule</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      limitations: {
+        title: "Limitations and Next Steps",
+        html: `
+          <p>The dataset is synthetic, so the findings are designed to demonstrate a complete analytics workflow rather than represent a real company. A production version should use verified transaction data and business-approved definitions.</p>
+          <ul>
+            <li>Add real sales, inventory, campaign, and customer data sources.</li>
+            <li>Include holidays, promotions, stockouts, and competitor effects.</li>
+            <li>Automate dashboard refresh after new data is added.</li>
+            <li>Extend the analysis with forecasting or predictive profit modeling.</li>
+          </ul>
+        `
+      }
+    };
+
     const viewer = document.querySelector("#reportViewer");
     const buttons = document.querySelectorAll("[data-report]");
     const overviewViewer = document.querySelector("#overviewViewer");
     const overviewButtons = document.querySelectorAll("[data-overview]");
+    const methodViewer = document.querySelector("#methodViewer");
+    const methodButtons = document.querySelectorAll("[data-method]");
 
     function showReport(reportKey) {
       const report = reports[reportKey];
@@ -592,7 +813,20 @@
       button.addEventListener("click", () => showOverview(button.dataset.overview));
     });
 
+    function showMethod(itemKey) {
+      const item = methodItems[itemKey];
+      methodViewer.innerHTML = `<h3>${item.title}</h3>${item.html}`;
+      methodButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.method === itemKey);
+      });
+    }
+
+    methodButtons.forEach((button) => {
+      button.addEventListener("click", () => showMethod(button.dataset.method));
+    });
+
     showOverview("summary");
+    showMethod("statement");
     showReport("sales");
   </script>
 </body>
