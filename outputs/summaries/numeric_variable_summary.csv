@@ -1,0 +1,10 @@
+variable,mean,median,standard_deviation,min,max
+units_sold,4.2,4.0,1.8,1.0,11.0
+unit_price,188.05,130.69,138.93,31.7,583.52
+discount_rate,0.1,0.1,0.04,0.0,0.25
+marketing_spend,72.2,65.96,35.85,4.2,298.89
+shipping_days,3.19,3.0,1.13,1.0,7.0
+customer_satisfaction,4.22,4.22,0.35,3.05,5.0
+revenue,758.17,503.72,708.59,31.15,5484.82
+profit,261.38,166.0,273.96,-33.44,2394.44
+profit_margin,0.31,0.32,0.1,-1.06,0.58
