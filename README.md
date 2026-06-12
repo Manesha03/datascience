@@ -1,4 +1,4 @@
-# Retail Sales Analytics Portfolio
+# Retail Sales Analytics
 
 This repository presents a complete retail sales analytics project. It combines sales trend analysis, distribution analysis, outlier detection, and correlation analysis in one reproducible workflow.
 
@@ -8,7 +8,7 @@ The project covers:
 2. Distribution and outlier analysis
 3. Correlation and relationship analysis
 
-The project uses a reproducible synthetic retail sales dataset, generates all required PNG charts, and exports concise written summaries for submission.
+The project uses a reproducible synthetic retail sales dataset generated directly by the Python script for educational purposes only. It does not use a real company dataset or an external downloaded dataset. The workflow generates all required PNG charts and exports concise written summaries for submission.
 
 ## Project Structure
 
@@ -49,10 +49,18 @@ The script creates:
 - `data/retail_sales.csv`
 - PNG charts in `outputs/charts/`
 - Short written summaries in `outputs/summaries/`
+- Data quality, numeric summary, and category-region performance tables in `outputs/summaries/`
 
 ## View The Dashboard
 
 Open `index.html` in a browser to view the generated charts and report links as a static dashboard.
+
+The dashboard includes:
+
+- Sticky navigation for major report sections
+- In-page report previews instead of plain text file opening
+- Methodology and data preparation notes
+- Variable structure, data quality, descriptive summary, limitation, and next-step previews
 
 ## Deliverables
 
@@ -82,4 +90,4 @@ Open `index.html` in a browser to view the generated charts and report links as 
 
 ## Dataset Notes
 
-The dataset is generated with a fixed random seed so results are reproducible. It includes order dates, categories, regions, units sold, unit price, discounts, shipping days, customer satisfaction, marketing spend, revenue, profit, and profit margin.
+The dataset is synthetic and created for educational purposes only by `generate_sales_data()` inside `src/retail_sales_analytics.py`. It is generated with a fixed random seed so results are reproducible. It includes order dates, categories, regions, units sold, unit price, discounts, shipping days, customer satisfaction, marketing spend, revenue, profit, and profit margin.
