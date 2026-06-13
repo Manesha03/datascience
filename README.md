@@ -1,4 +1,4 @@
-# Retail Sales Analytics
+# Retail Sales Analytics 
 
 This repository presents a complete retail sales analytics project. It combines sales trend analysis, distribution analysis, outlier detection, and correlation analysis in one reproducible workflow.
 
@@ -8,7 +8,7 @@ The project covers:
 2. Distribution and outlier analysis
 3. Correlation and relationship analysis
 
-The project uses a reproducible synthetic retail sales dataset generated directly by the Python script for educational purposes only. It does not use a real company dataset or an external downloaded dataset. The workflow generates all required PNG charts and exports concise written summaries for submission.
+The project uses a reproducible synthetic retail sales dataset, generates all required PNG charts, and exports concise written summaries for submission.
 
 ## Project Structure
 
@@ -90,4 +90,4 @@ The dashboard includes:
 
 ## Dataset Notes
 
-The dataset is synthetic and created for educational purposes only by `generate_sales_data()` inside `src/retail_sales_analytics.py`. It is generated with a fixed random seed so results are reproducible. It includes order dates, categories, regions, units sold, unit price, discounts, shipping days, customer satisfaction, marketing spend, revenue, profit, and profit margin.
+The dataset is generated with a fixed random seed so results are reproducible. It includes order dates, categories, regions, units sold, unit price, discounts, shipping days, customer satisfaction, marketing spend, revenue, profit, and profit margin.
